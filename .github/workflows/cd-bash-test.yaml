@@ -1,0 +1,25 @@
+name: Check File Existence and Output
+
+on:
+  push:
+    branches: ['*']
+
+jobs:
+  check_file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Check if the file exists and display content
+        run: |
+          FILE_NAME="your-file.txt"  # Replace with the file name you want to check
+          
+          if [ -f "$FILE_NAME" ]; then
+            echo "$FILE_NAME exists. Displaying content:"
+            cat "$FILE_NAME"
+          else
+            echo "Error: $FILE_NAME does not exist!"
+            exit 1  # This will cause the workflow to fail
+          fi
